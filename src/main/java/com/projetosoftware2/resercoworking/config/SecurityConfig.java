@@ -62,25 +62,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/produtos/**",
-            "/estados/**",
-            "/categorias/**",
-            "/usuarios/**"
+//            "/usuarios/**"
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
-            "/usuarios",
             "/login",
             "/auth/forgot/**"
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-
-        if (Arrays.asList(env.getActiveProfiles()).contains("test")){
-            http.headers().frameOptions().disable();
-        }
-
         http.cors().and().csrf().disable();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()

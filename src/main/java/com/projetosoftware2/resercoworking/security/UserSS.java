@@ -1,6 +1,7 @@
 package com.projetosoftware2.resercoworking.security;
 
-import com.projetosoftware2.resercoworking.domain.enums.Perfil;
+import com.projetosoftware2.resercoworking.domain.AssociacaoUsuarioPerfil;
+import com.projetosoftware2.resercoworking.domain.Perfil;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,19 +19,18 @@ public class UserSS implements UserDetails {
 
     private Integer id;
     private String email;
-    private String password;
+    private String senha;
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserSS(){
-
     }
 
-    public UserSS(Integer id, String email, String password, Set<Perfil> perfis){
+    public UserSS(Integer id, String email, String senha, Set<AssociacaoUsuarioPerfil> perfis){
         super();
         this.id = id;
         this.email = email;
-        this.password = password;
-        this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
+        this.senha = senha;
+        this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getPerfil().getDescricao())).collect(Collectors.toList());
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UserSS implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return senha;
     }
 
     @Override

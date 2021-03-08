@@ -1,7 +1,6 @@
 package com.projetosoftware2.resercoworking.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.projetosoftware2.resercoworking.domain.enums.Perfil;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,17 +25,19 @@ public class Usuario implements Serializable {
     @Column(name = "nome")
     private String nome;
 
+    @Column(name = "sobrenome")
+    private String sobrenome;
+
     @Column(name = "email", unique=true)
     private String email;
 
     @Column(name = "password")
-    private String password;
+    @JsonIgnore
+    private String senha;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "PERFIS")
-    private Set<Integer> perfis = new HashSet<>();
+    @Column(name = "situacao")
+    private Boolean situacao = Boolean.TRUE;
 
-    public void addPerfil(Perfil perfil){
-        perfis.add(perfil.getCod());
-    }
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+    private Set<AssociacaoUsuarioPerfil> associacaoUsuarioPerfil = new HashSet<>();
 }
