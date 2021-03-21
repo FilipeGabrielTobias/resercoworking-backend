@@ -3,6 +3,9 @@ package com.projetosoftware2.resercoworking.domain;
 import lombok.*;
 
 import javax.persistence.*;
+
+import com.projetosoftware2.resercoworking.dto.PerfilDTO;
+
 import java.io.Serializable;
 
 @Entity
@@ -25,4 +28,19 @@ public class Perfil implements Serializable {
 
     @Column(name = "descricao")
     private String descricao;
+    
+    public Perfil(PerfilDTO perfilDTO) {
+		this.id        = perfilDTO.getId();
+		this.nome      = perfilDTO.getNome();
+		this.descricao = perfilDTO.getDescricao();
+	}
+
+	public Perfil updatePerfil(PerfilDTO dto) {
+		this.nome = dto.getNome();
+        this.descricao = dto.getDescricao();
+        
+
+        return this;
+		
+	}
 }
