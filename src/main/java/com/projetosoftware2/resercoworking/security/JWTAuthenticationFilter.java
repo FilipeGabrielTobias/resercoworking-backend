@@ -1,11 +1,17 @@
 package com.projetosoftware2.resercoworking.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.projetosoftware2.resercoworking.domain.Usuario;
 import com.projetosoftware2.resercoworking.dto.CredenciaisDTO;
+import com.projetosoftware2.resercoworking.repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -14,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,6 +32,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private AuthenticationManager authenticationManager;
 
     private JWTUtil jwtUtil;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil){
         setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
@@ -49,15 +59,24 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest req,
-                                            HttpServletResponse res,
-                                            FilterChain chain,
-                                            Authentication auth) throws IOException, ServletException {
+                                               HttpServletResponse res,
+                                               FilterChain chain,
+                                               Authentication auth) throws IOException, ServletException {
 
 
-        String username = ((UserSS) auth.getPrincipal()).getUsername();
-        String token = jwtUtil.generateToken(username);
+        UserSS principal = (UserSS) auth.getPrincipal();
+        String token = jwtUtil.generateToken(principal.getEmail());
         res.addHeader("Authorization", "Bearer " + token);
         res.addHeader("access-control-expose-headers", "Authorization");
+        res.setContentType("application/json");
+        res.getWriter().append(jsonSuccessful(principal));
+    }
+
+    private String jsonSuccessful(UserSS usuario) {
+        return "{\"id\": \"" + usuario.getId() + "\", "
+                + "\"nome\": \"" + usuario.getNome() + "\", "
+                + "\"email\": \"" + usuario.getEmail() + "\"} ";
+//                + "\"permissoes\": " + userSS.getAuthorities() + "}";
     }
 
     private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {

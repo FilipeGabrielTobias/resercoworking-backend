@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
 @Data
 public class UserSS implements UserDetails {
 
-    private Integer id;
+    private Long id;
+    private String nome;
     private String email;
     private String senha;
     private Collection<? extends GrantedAuthority> authorities;
@@ -25,9 +26,10 @@ public class UserSS implements UserDetails {
     public UserSS(){
     }
 
-    public UserSS(Integer id, String email, String senha, Set<AssociacaoUsuarioPerfil> perfis){
+    public UserSS(Long id, String nome, String email, String senha, Set<AssociacaoUsuarioPerfil> perfis){
         super();
         this.id = id;
+        this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getPerfil().getDescricao())).collect(Collectors.toList());
