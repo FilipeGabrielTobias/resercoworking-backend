@@ -15,7 +15,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Table(name = "modalidade_espaco")
 public class ModalidadeEspaco implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id

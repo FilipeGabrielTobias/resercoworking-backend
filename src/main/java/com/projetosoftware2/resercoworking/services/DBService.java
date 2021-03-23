@@ -3,7 +3,7 @@ package com.projetosoftware2.resercoworking.services;
 import com.projetosoftware2.resercoworking.domain.AssociacaoUsuarioPerfil;
 import com.projetosoftware2.resercoworking.domain.Perfil;
 import com.projetosoftware2.resercoworking.domain.Usuario;
-import com.projetosoftware2.resercoworking.repositories.PerfilRepositoy;
+import com.projetosoftware2.resercoworking.repositories.PerfilRepository;
 import com.projetosoftware2.resercoworking.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,7 +26,7 @@ public class DBService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private PerfilRepositoy perfilRepositoy;
+    private PerfilRepository perfilRepositoy;
 
     public void instantiateTestDatabase() throws ParseException {
         Perfil perfil = new Perfil();
