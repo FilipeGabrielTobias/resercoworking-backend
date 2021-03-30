@@ -19,27 +19,27 @@ public class EspacoResource {
     private EspacoService espacoService;
 
     @GetMapping
-    public List<Espaco> getPremiacoes() {
+    public List<Espaco> getEspacos() {
         return espacoService.getAllEspaco();
     }
 
     @GetMapping("/{espacoId}")
-    public Espaco getByIdPremiacao(@PathVariable Long espacoId) {
+    public Espaco getByIdEspaco(@PathVariable Long espacoId) {
         return espacoService.getByIdEspaco(espacoId);
     }
 
     @PostMapping
-    public Espaco savePermiacao(@RequestBody EspacoDto dto) {
+    public Espaco saveEspaco(@RequestBody EspacoDto dto) {
         return espacoService.saveEspaco(dto);
     }
 
     @PutMapping("/{espacoId}")
-    public Espaco updatePremiacao(@PathVariable Long espacoId, @RequestBody EspacoDto dto) {
+    public Espaco updateEspaco(@PathVariable Long espacoId, @RequestBody EspacoDto dto) {
         return espacoService.updateEspaco(espacoId, dto);
     }
 
     @DeleteMapping("/{espacoId}")
-    public void deletePremiacao(@PathVariable Long espacoId) {
+    public void deleteEspaco(@PathVariable Long espacoId) {
         espacoService.deleteEspaco(espacoId);
     }
 }

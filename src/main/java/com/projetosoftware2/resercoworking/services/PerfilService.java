@@ -35,7 +35,7 @@ public class PerfilService {
         return repository.save(perfil.updatePerfil(dto));
     }
 
-    public void deleteEspaco(Long id) {
+    public void deletePerfil(Long id) {
         repository.deleteById(id);
     }
 }

@@ -42,7 +42,7 @@ public class Premiacao implements Serializable {
         this.situacao = dto.getSituacao();
     }
 
-    public Premiacao updatePremiacao(PremiacaoDto dto) {
+    public Premiacao updatePremiacao(Premiacao dto) {
         this.nome = dto.getNome();
         this.descricao = dto.getDescricao();
         this.pontosNecessarios = dto.getPontosNecessarios();

@@ -4,12 +4,8 @@ import com.projetosoftware2.resercoworking.domain.AssociacaoUsuarioPerfil;
 import com.projetosoftware2.resercoworking.domain.Perfil;
 import com.projetosoftware2.resercoworking.domain.Premiacao;
 import com.projetosoftware2.resercoworking.domain.Usuario;
-
 import com.projetosoftware2.resercoworking.repositories.PerfilRepository;
-
-
 import com.projetosoftware2.resercoworking.repositories.PremiacaoRepository;
-
 import com.projetosoftware2.resercoworking.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,7 +16,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Filipe.Tobias on 31/07/2018.
  */
 @Service
 public class DBService {

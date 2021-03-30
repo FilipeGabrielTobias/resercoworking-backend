@@ -24,11 +24,11 @@ public class PremiacaoService {
                 .orElseThrow(() -> new ObjectNotFoundException("Premiação não encontrada"));
     }
 
-    public Premiacao savePremiacao(PremiacaoDto dto) {
-        return premiacaoRepository.save(new Premiacao(dto));
+    public Premiacao savePremiacao(Premiacao dto) {
+        return premiacaoRepository.save(dto);
     }
 
-    public Premiacao updatePremiacao(Long premiacaoId, PremiacaoDto dto) {
+    public Premiacao updatePremiacao(Long premiacaoId, Premiacao dto) {
         Premiacao premiacao = premiacaoRepository.findById(premiacaoId)
                 .orElseThrow(() -> new ObjectNotFoundException("Premiação não encontrada"));
         return premiacaoRepository.save(premiacao.updatePremiacao(dto));

@@ -1,12 +1,12 @@
 package com.projetosoftware2.resercoworking.resources;
 
 import com.projetosoftware2.resercoworking.domain.ModalidadeEspaco;
+import com.projetosoftware2.resercoworking.dto.ModalidadeEspacoDto;
 import com.projetosoftware2.resercoworking.services.ModalidadeEspacoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/modalidadeEspaco")
@@ -20,17 +20,21 @@ public class ModalidadeEspacoResource {
         return modalidadeEspacoService.selectModalidade();
     }
 
-    @PostMapping
-    public void insertModalidade(){
+    @GetMapping("{id}")
+    public ModalidadeEspaco getModalidadeEspacoById(@PathVariable Long id) {
+        return modalidadeEspacoService.getModalidadeEspacoById(id);
+    }
 
-        modalidadeEspacoService.insertModalidadeEspaco(1l,"modalidade1","desc1");
+    @PostMapping
+    public ModalidadeEspaco insertModalidade(@RequestBody ModalidadeEspaco dto){
+        return modalidadeEspacoService.insertModalidadeEspaco(dto);
     }
-    @DeleteMapping
-    public void deleteModalidadeEspaco(){
-        modalidadeEspacoService.deleteModalidadeEspaco(modalidadeEspacoService.m1.findByNome("modalidade1"));
+    @DeleteMapping("{id}")
+    public void deleteModalidadeEspaco(@PathVariable Long id){
+        modalidadeEspacoService.deleteModalidadeEspaco(id);
     }
-    @PutMapping
-    public void updateModalidade(){
-        modalidadeEspacoService.updateModalidadeEspaco(modalidadeEspacoService.m1.findByNome("modalidade1"),"modalidadeNova","descNova");
+    @PutMapping("{id}")
+    public ModalidadeEspaco updateModalidade(@PathVariable Long id, @RequestBody ModalidadeEspaco dto){
+        return modalidadeEspacoService.updateModalidadeEspaco(id, dto);
     }
 }

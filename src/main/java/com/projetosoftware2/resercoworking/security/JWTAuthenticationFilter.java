@@ -69,13 +69,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         res.addHeader("Authorization", "Bearer " + token);
         res.addHeader("access-control-expose-headers", "Authorization");
         res.setContentType("application/json");
-        res.getWriter().append(jsonSuccessful(principal));
+        res.getWriter().append(jsonSuccessful(principal, token));
     }
 
-    private String jsonSuccessful(UserSS usuario) {
+    private String jsonSuccessful(UserSS usuario, String token) {
         return "{\"id\": \"" + usuario.getId() + "\", "
                 + "\"nome\": \"" + usuario.getNome() + "\", "
-                + "\"email\": \"" + usuario.getEmail() + "\"} ";
+                + "\"email\": \"" + usuario.getEmail() + "\", "
+                + "\"accessToken\": \"" + token + "\"} ";
 //                + "\"permissoes\": " + userSS.getAuthorities() + "}";
     }
 

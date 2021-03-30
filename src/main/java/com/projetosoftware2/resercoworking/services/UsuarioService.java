@@ -10,4 +10,18 @@ import java.util.List;
 @Service
 public class UsuarioService {
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    public List<Usuario> getUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+    public Usuario saveUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    public void deleteUsuario(Long id) {
+        usuarioRepository.deleteById(id);
+    }
 }

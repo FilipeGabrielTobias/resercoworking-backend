@@ -3,16 +3,13 @@ package com.projetosoftware2.resercoworking.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import com.projetosoftware2.resercoworking.domain.Perfil;
 import com.projetosoftware2.resercoworking.dto.PerfilDTO;
 import com.projetosoftware2.resercoworking.services.PerfilService;
 
+@RestController
+@RequestMapping("/perfil")
 public class PerfilResource {
   
     @Autowired
@@ -23,14 +20,14 @@ public class PerfilResource {
         return perfilService.getAll();
     }
 
-    @GetMapping("/{PerfilId}")
+    @GetMapping("/{id}")
     public Perfil getByIdPerfil(@PathVariable Long id) {
         return perfilService.getById(id);
     }
 
     @PostMapping
     public Perfil savePerfil(@RequestBody  PerfilDTO dto) {
-        return perfilService.savePerfil(dto);
+        return perfilService.save(dto);
     }
 
     @PutMapping("/{PerfilId}")

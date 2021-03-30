@@ -62,12 +62,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-//            "/usuarios/**"
+            "/usuario/**",
+            "/perfil/**",
+            "/premiacao/**",
+            "/modalidadeEspaco/**",
+            "/espaco/**",
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
             "/login",
-            "/auth/forgot/**"
+            "/auth/forgot/**",
+            "/usuario/**",
+            "/perfil/**",
+            "/premiacao/**",
+            "/modalidadeEspaco/**",
+            "/espaco/**",
+    };
+
+    private static final String[] PUBLIC_MATCHERS_DELETE = {
+            "/usuario/**",
+            "/perfil/**",
+            "/premiacao/**",
+            "/modalidadeEspaco/**",
+            "/espaco/**",
+    };
+
+    private static final String[] PUBLIC_MATCHERS_PUT = {
+            "/usuario/**",
+            "/perfil/**",
+            "/premiacao/**",
+            "/modalidadeEspaco/**",
+            "/espaco/**",
     };
 
     @Override
@@ -76,6 +101,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
+                .antMatchers(HttpMethod.DELETE, PUBLIC_MATCHERS_DELETE).permitAll()
+                .antMatchers(HttpMethod.PUT, PUBLIC_MATCHERS_PUT).permitAll()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/awards")
+@RequestMapping("/premiacao")
 public class PremiacaoResource {
 
     @Autowired
@@ -26,12 +26,12 @@ public class PremiacaoResource {
     }
 
     @PostMapping
-    public Premiacao savePermiacao(@RequestBody PremiacaoDto dto) {
+    public Premiacao savePermiacao(@RequestBody Premiacao dto) {
         return premiacaoService.savePremiacao(dto);
     }
 
     @PutMapping("/{premiacaoId}")
-    public Premiacao updatePremiacao(@PathVariable Long premiacaoId, @RequestBody PremiacaoDto dto) {
+    public Premiacao updatePremiacao(@PathVariable Long premiacaoId, @RequestBody Premiacao dto) {
         return premiacaoService.updatePremiacao(premiacaoId, dto);
     }
 
