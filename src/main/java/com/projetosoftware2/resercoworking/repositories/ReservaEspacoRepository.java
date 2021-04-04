@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReservaEsparcoRepository extends JpaRepository<ReservaEspaco, Long> {
+public interface ReservaEspacoRepository extends JpaRepository<ReservaEspaco, Long> {
 }

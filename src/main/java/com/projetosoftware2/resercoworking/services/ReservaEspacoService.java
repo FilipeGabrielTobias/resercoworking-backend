@@ -5,42 +5,51 @@ import com.projetosoftware2.resercoworking.domain.ReservaEspacoCancelamento;
 import com.projetosoftware2.resercoworking.domain.SituacaoReservaEspaco;
 import com.projetosoftware2.resercoworking.dto.ReservaEspacoCancelamentoDto;
 import com.projetosoftware2.resercoworking.dto.ReservaEspacoDto;
-import com.projetosoftware2.resercoworking.repositories.ReservaEsparcoCancelamentoRepository;
-import com.projetosoftware2.resercoworking.repositories.ReservaEsparcoRepository;
+import com.projetosoftware2.resercoworking.repositories.ReservaEspacoCancelamentoRepository;
+import com.projetosoftware2.resercoworking.repositories.ReservaEspacoRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class ReservaEspacoService {
 
     @Autowired
-    private ReservaEsparcoRepository reservaEsparcoRepository;
+    private ReservaEspacoRepository reservaEspacoRepository;
 
     @Autowired
-    private ReservaEsparcoCancelamentoRepository reservaEsparcoCancelamentoRepository;
+    private ReservaEspacoCancelamentoRepository reservaEspacoCancelamentoRepository;
 
     public List<ReservaEspaco> getAllReservas() {
-        return reservaEsparcoRepository.findAll();
+        return reservaEspacoRepository.findAll();
     }
 
     public ReservaEspaco getReservaById(Long reservaId) {
-        return reservaEsparcoRepository.findById(reservaId)
+        return reservaEspacoRepository.findById(reservaId)
                 .orElseThrow(() -> new ObjectNotFoundException("Reserva não encontrada"));
     }
 
     public ReservaEspaco saveReserva(ReservaEspacoDto dto) {
-        return reservaEsparcoRepository.save(new ReservaEspaco(dto));
+        return reservaEspacoRepository.save(new ReservaEspaco(dto));
     }
 
     public ReservaEspacoCancelamento cancelarReservaEspaco(ReservaEspacoCancelamentoDto dto) {
-        ReservaEspaco reserva = reservaEsparcoRepository.findById(dto.getReservaEspaco().getId())
+        ReservaEspaco reserva = reservaEspacoRepository.findById(dto.getReservaEspaco().getId())
                 .orElseThrow(() -> new ObjectNotFoundException("Reserva não encontrada"));
         reserva.setSituacaoReservaEspaco(SituacaoReservaEspaco.CANCELADO);
         ReservaEspacoCancelamento reservaEspacoCancelamento = new ReservaEspacoCancelamento(dto);
-        reservaEsparcoRepository.save(reserva);
-        return reservaEsparcoCancelamentoRepository.save(reservaEspacoCancelamento);
+        reservaEspacoRepository.save(reserva);
+        return reservaEspacoCancelamentoRepository.save(reservaEspacoCancelamento);
+    }
+    
+    public ReservaEspaco finalizarReserva(Long reservaId) {
+    	ReservaEspaco reserva = reservaEspacoRepository.findById(reservaId)
+                .orElseThrow(() -> new ObjectNotFoundException("Reserva não encontrada"));
+        reserva.setSituacaoReservaEspaco(SituacaoReservaEspaco.FINALIZADO);
+        reserva.setDataFinal(LocalDate.now());
+        return reservaEspacoRepository.save(reserva);
     }
 }

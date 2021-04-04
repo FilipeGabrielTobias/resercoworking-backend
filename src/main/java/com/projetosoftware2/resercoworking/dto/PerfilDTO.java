@@ -6,13 +6,12 @@ import com.projetosoftware2.resercoworking.domain.Perfil;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+
+@Data
 public class PerfilDTO  {
 	
 	private Long id;	

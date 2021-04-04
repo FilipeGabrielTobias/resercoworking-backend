@@ -50,6 +50,8 @@ public class ReservaEspaco implements Serializable {
     @ManyToOne
     @JoinColumn(name = "fk_usuario_reservou", nullable = false)
     private Usuario usuarioReservou;
+    
+    
 
     public ReservaEspaco(ReservaEspacoDto dto) {
         this.dataInicial = dto.getDataInicial();
