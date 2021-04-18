@@ -51,7 +51,9 @@ public class ReservaEspaco implements Serializable {
     @JoinColumn(name = "fk_usuario_reservou", nullable = false)
     private Usuario usuarioReservou;
     
-    
+    @OneToOne
+    @JoinColumn(name = "fk_feedback", nullable = true)
+    private FeedBackEspaco feedBackEspaco;
 
     public ReservaEspaco(ReservaEspacoDto dto) {
         this.dataInicial = dto.getDataInicial();

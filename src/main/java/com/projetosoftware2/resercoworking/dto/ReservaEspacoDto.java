@@ -1,5 +1,6 @@
 package com.projetosoftware2.resercoworking.dto;
 
+import com.projetosoftware2.resercoworking.domain.FeedBackEspaco;
 import com.projetosoftware2.resercoworking.domain.FormaPagamento;
 import lombok.Data;
 
@@ -22,6 +23,8 @@ public class ReservaEspacoDto {
     private Espaco espaco;
 
     private Usuario usuarioReservou;
+    
+    private FeedBackEspaco feedBackEspaco;
 
     @Data
     public static class Espaco {
