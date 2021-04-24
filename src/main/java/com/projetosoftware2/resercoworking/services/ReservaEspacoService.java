@@ -1,10 +1,12 @@
 package com.projetosoftware2.resercoworking.services;
 
+import com.projetosoftware2.resercoworking.domain.FeedBackEspaco;
 import com.projetosoftware2.resercoworking.domain.ReservaEspaco;
 import com.projetosoftware2.resercoworking.domain.ReservaEspacoCancelamento;
 import com.projetosoftware2.resercoworking.domain.SituacaoReservaEspaco;
 import com.projetosoftware2.resercoworking.dto.ReservaEspacoCancelamentoDto;
 import com.projetosoftware2.resercoworking.dto.ReservaEspacoDto;
+import com.projetosoftware2.resercoworking.repositories.FeedBackEspacoRepository;
 import com.projetosoftware2.resercoworking.repositories.ReservaEspacoCancelamentoRepository;
 import com.projetosoftware2.resercoworking.repositories.ReservaEspacoRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
@@ -22,7 +24,10 @@ public class ReservaEspacoService {
 
     @Autowired
     private ReservaEspacoCancelamentoRepository reservaEspacoCancelamentoRepository;
-
+    
+    @Autowired
+    private FeedBackEspacoRepository feedBackEspacoRepository;
+    
     public List<ReservaEspaco> getAllReservas() {
         return reservaEspacoRepository.findAll();
     }
@@ -51,5 +56,14 @@ public class ReservaEspacoService {
         reserva.setSituacaoReservaEspaco(SituacaoReservaEspaco.FINALIZADO);
         reserva.setDataFinal(LocalDate.now());
         return reservaEspacoRepository.save(reserva);
+    }
+    
+    public ReservaEspaco adicionaFeedBack(Long reservaId, Long feedBackEspacoId) {//passar feedback
+    	ReservaEspaco reserva = reservaEspacoRepository.findById(reservaId)
+                .orElseThrow(() -> new ObjectNotFoundException("Reserva não encontrada"));
+    	FeedBackEspaco feedBackEspaco = feedBackEspacoRepository.findById(feedBackEspacoId)
+    			.orElseThrow(() -> new ObjectNotFoundException("FeedBack Não encontrado"));
+    	reserva.setFeedBackEspaco(feedBackEspaco);
+    	return reservaEspacoRepository.save(reserva);
     }
 }
