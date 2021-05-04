@@ -34,8 +34,8 @@ public class PaisService {
 		Pais pais =  getById(id);
 		return repository.save(pais.updatePais(dto));
 	}
-	//TO-DO fazer throw exception
-	public void deletePais(Long id) {
+	
+	public void deletePais(Long id) throws ObjectNotFoundException {		
         repository.deleteById(id);
     }
 	

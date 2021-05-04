@@ -30,6 +30,8 @@ public class ReservaEspacoDto {
     public static class Espaco {
         private Long id;
         private String nome;
+        private Integer qtPontos;
+        private Double vlHora;
     }
 
     @Data

@@ -33,8 +33,11 @@ public class Espaco implements Serializable {
     private Double metrosQuadrados;
 
     @Column(name = "pontos", nullable = false)
-    private Integer pontos;
-
+    private Integer qtPontos;
+    
+    @Column(name = "vl_hora", nullable = false)
+    private Double vlHora;
+    
     @Column(name = "nota")
     private Double nota;
 
@@ -49,7 +52,8 @@ public class Espaco implements Serializable {
         this.nome = dto.getNome();
         this.descicao = dto.getDescicao();
         this.metrosQuadrados = dto.getMetrosQuadrados();
-        this.pontos = dto.getPontos();
+        this.qtPontos = dto.getQtPontos();
+        this.vlHora = dto.getVlHora();
         this.nota = dto.getNota();
         this.situacao = dto.getSituacao();
         this.modalidadeEspaco = modalidadeEspaco;
@@ -59,8 +63,9 @@ public class Espaco implements Serializable {
         this.nome = dto.getNome();
         this.descicao = dto.getDescicao();
         this.metrosQuadrados = dto.getMetrosQuadrados();
-        this.pontos = dto.getPontos();
-        this.nota = dto.getNota();
+        this.qtPontos = dto.getQtPontos();
+        this.vlHora = dto.getVlHora();
+        this.nota = dto.getNota();        
         this.situacao = dto.getSituacao();
         this.modalidadeEspaco = modalidadeEspaco;
 

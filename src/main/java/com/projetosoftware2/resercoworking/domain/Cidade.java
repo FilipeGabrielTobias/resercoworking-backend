@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.projetosoftware2.resercoworking.dto.CidadeDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +36,22 @@ public class Cidade {
 	@ManyToOne
 	@JoinColumn(name = "fk_estado", nullable = false)
 	private Estado estado;
+	
+	public Cidade(CidadeDTO dto) {
+		this.id = dto.getId();
+		this.nmCidade= dto.getNmCidade();
+		Estado estado = new Estado();
+		estado.setId(dto.getEstado().getId());
+		this.estado = estado;
+	}
+
+	public Cidade updateCidade(CidadeDTO dto) {
+		this.nmCidade= dto.getNmCidade();
+		Estado estado = new Estado();
+		estado.setId(dto.getEstado().getId());
+		this.estado = estado;
+		return this;
+	}
+	
 	
 }

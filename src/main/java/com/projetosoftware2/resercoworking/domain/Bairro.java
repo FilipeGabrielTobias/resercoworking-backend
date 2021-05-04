@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.projetosoftware2.resercoworking.domain.Bairro.BairroBuilder;
+import com.projetosoftware2.resercoworking.dto.BairroDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,5 +37,22 @@ public class Bairro {
 	@ManyToOne
 	@JoinColumn(name = "fk_cidade", nullable = false)
 	private Cidade cidade;
+	
+	public Bairro(BairroDTO dto) {
+		this.id = dto.getId();
+		this.nmBairro = dto.getNmBairro();
+		Cidade cidade = new Cidade();
+		cidade.setId(dto.getCidade().getId());
+		this.cidade = cidade;
+	}
+
+	public Bairro updateBairro(BairroDTO dto) {		
+		this.nmBairro = dto.getNmBairro();
+		Cidade cidade = new Cidade();
+		cidade.setId(dto.getCidade().getId());
+		this.cidade = cidade;		
+		return this;
+	}
+
 	
 }

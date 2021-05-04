@@ -53,8 +53,7 @@ public class Estado {
 		this.nmEstado = dto.getNmEstado();
 		Pais pais =  new Pais();
 		pais.setId(dto.getPais().getId());
-		this.pais = pais;
-		
+		this.pais = pais;		
 		return this;
 	}
 	

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.projetosoftware2.resercoworking.dto.EnderecoDTO;
 
 import lombok.*;
 
@@ -37,5 +38,22 @@ public class Endereco implements Serializable {/**
 	@ManyToOne
 	@JoinColumn(name = "fk_bairro", nullable = false)
 	private Bairro bairro;
+	
+	public Endereco(EnderecoDTO dto) {
+        this.id = dto.getId();
+        this.nmRua = dto.getNmRua();
+        Bairro bairro = new Bairro();
+		bairro.setId(dto.getBairro().getId());
+		this.bairro = bairro;
+	}
+	
+	public Endereco updateEndereco(EnderecoDTO dto) {
+		this.nmRua = dto.getNmRua();
+		Bairro bairro = new Bairro();
+		bairro.setId(dto.getBairro().getId());
+		this.bairro = bairro;
+		return this;
+	}
+
 	
 }

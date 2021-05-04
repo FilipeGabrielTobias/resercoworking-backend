@@ -35,6 +35,12 @@ public class ReservaEspaco implements Serializable {
     @Column(name = "hora_final", nullable = false)
     private LocalTime horaFinal;
 
+    @Column(name = "vl_total", nullable = false)
+    private Double vlTotal;
+    
+    @Column(name = "qt_pontos_total", nullable = false)
+    private Integer qtPontosTotal;
+         
     @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento", nullable = false)
     private FormaPagamento formaPagamento;
@@ -62,8 +68,10 @@ public class ReservaEspaco implements Serializable {
         this.horaFinal = dto.getHoraFinal();
         this.formaPagamento = dto.getFormaPagamento();
         Espaco espaco = new Espaco();
-        espaco.setId(dto.getEspaco().getId());
+        espaco.setId(dto.getEspaco().getId());        
         this.espaco = espaco;
+        this.qtPontosTotal = dto.getEspaco().getQtPontos();
+        this.vlTotal = dto.getEspaco().getVlHora();
         Usuario usuario = new Usuario();
         usuario.setId(dto.getUsuarioReservou().getId());
         this.usuarioReservou = usuario;

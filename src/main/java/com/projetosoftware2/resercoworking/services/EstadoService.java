@@ -30,9 +30,14 @@ public class EstadoService {
 		return repository.save(new Estado(dto));
 	}
 	
-	public Estado updateEstado(EstadoDTO dto, Long id) {
+	public Estado updateEstado(Long id, EstadoDTO dto) {
 	   Estado estado = getById(id);
        return repository.save(estado.updateEstado(dto));
+	}
+
+
+	public void deleteEstado(Long estadoId) {
+		repository.deleteById(estadoId);
 	}
 	
 }

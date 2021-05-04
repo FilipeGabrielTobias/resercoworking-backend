@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,22 +23,46 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "nome")
+    
+    @Column(name = "nr_cpf")
+    private String cpf;
+    
+    @Column(name = "nm_usuario")
     private String nome;
+        
+    //verificar
+    @ManyToOne
+    @JoinColumn(name = "cd_perfil", unique = true)
+    private Perfil perfil; 
+    
+    @ManyToOne
+    @JoinColumn(name = "cd_endereco", nullable = false)
+    private Endereco endereco;
+    
+    @Column(name = "dt_nascimento")
+    private LocalDate dataNascimento;
+    
+    @Column(name = "nr_telefone")
+    private Integer nrTelefone;
 
-    @Column(name = "sobrenome")
-    private String sobrenome;
-
-    @Column(name = "email", unique=true)
+    @Column(name = "nm_email")
     private String email;
-
-    @Column(name = "password")
+    
+    @Column(name = "qt_pontos")
+    private Integer qtPontos;
+    
+    @Column(name = "nm_login")
+    private String nmLogin;
+    
+    @Column(name = "nm_senha")
     @JsonIgnore
     private String senha;
-
-    @Column(name = "situacao")
+            
+    @Column(name = "status_usuario")
     private Boolean situacao = Boolean.TRUE;
+    
+    
+    
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
     private Set<AssociacaoUsuarioPerfil> associacaoUsuarioPerfil = new HashSet<>();

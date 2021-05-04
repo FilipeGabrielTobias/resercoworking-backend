@@ -10,7 +10,12 @@ import lombok.Data;
 public class PaisDTO implements Serializable {
    
 	
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 	
     private String nmPais;
     

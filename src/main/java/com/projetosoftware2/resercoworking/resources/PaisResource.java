@@ -33,12 +33,12 @@ public class PaisResource {
 	 }
 
 	 @PutMapping("/{PaisId}")
-	 public Pais updatePerfil(@PathVariable Long PaisId, @RequestBody  PaisDTO dto) {
+	 public Pais updatePais(@PathVariable Long PaisId, @RequestBody  PaisDTO dto) {
 	      return service.updatePais(PaisId, dto);
 	 }
 
 	 @DeleteMapping("/{PaisId}")
-	 public void deletePerfil(@PathVariable Long PaisId) {
+	 public void deletePais(@PathVariable Long PaisId) {
 	      service.deletePais(PaisId);
 	 }
     

@@ -1,6 +1,5 @@
 package com.projetosoftware2.resercoworking.dto;
 
-import com.projetosoftware2.resercoworking.domain.Bairro;
 import com.projetosoftware2.resercoworking.dto.BairroDTO.Cidade;
 
 
@@ -21,3 +20,4 @@ public class EnderecoDTO {
 		private Cidade cidade;
 	}
 }
+
