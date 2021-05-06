@@ -67,6 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/premiacao/**",
             "/modalidadeEspaco/**",
             "/espaco/**",
+            "/feedbackEspaco/**",
+            "/pais/**",
+            "/endereco/**",
+            "/estado/**",
+            "/cidade/**",
+            "/bairro/**",
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
@@ -77,6 +83,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/premiacao/**",
             "/modalidadeEspaco/**",
             "/espaco/**",
+            "/feedbackEspaco/**",
+            "/pais/**",
+            "/endereco/**",
+            "/estado/**",
+            "/cidade/**",
+            "/bairro/**",
     };
 
     private static final String[] PUBLIC_MATCHERS_DELETE = {
@@ -85,6 +97,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/premiacao/**",
             "/modalidadeEspaco/**",
             "/espaco/**",
+            "/feedbackEspaco/**",
+            "/pais/**",
+            "/endereco/**",
+            "/estado/**",
+            "/cidade/**",
+            "/bairro/**",
     };
 
     private static final String[] PUBLIC_MATCHERS_PUT = {
@@ -93,6 +111,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/premiacao/**",
             "/modalidadeEspaco/**",
             "/espaco/**",
+            "/feedbackEspaco/**",
+            "/pais/**",
+            "/endereco/**",
+            "/estado/**",
+            "/cidade/**",
+            "/bairro/**",
     };
 
     @Override
