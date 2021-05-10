@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetosoftware2.resercoworking.domain.Pais;
-import com.projetosoftware2.resercoworking.dto.PaisDTO;
-import com.projetosoftware2.resercoworking.dto.PerfilDTO;
+import com.projetosoftware2.resercoworking.domain.dto.PaisDto;
 import com.projetosoftware2.resercoworking.repositories.PaisRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
 
@@ -26,11 +25,11 @@ public class PaisService {
                 .orElseThrow(() -> new ObjectNotFoundException("País não encontrado"));
     }
 	
-	public Pais savePais(PaisDTO dto) {
+	public Pais savePais(PaisDto dto) {
 		return repository.save(new Pais(dto));
 	}
 	
-	public Pais updatePais(Long id, PaisDTO dto) {
+	public Pais updatePais(Long id, PaisDto dto) {
 		Pais pais =  getById(id);
 		return repository.save(pais.updatePais(dto));
 	}

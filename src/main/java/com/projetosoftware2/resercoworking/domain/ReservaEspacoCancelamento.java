@@ -1,6 +1,6 @@
 package com.projetosoftware2.resercoworking.domain;
 
-import com.projetosoftware2.resercoworking.dto.ReservaEspacoCancelamentoDto;
+import com.projetosoftware2.resercoworking.domain.dto.ReservaEspacoCancelamentoDto;
 import lombok.*;
 
 import javax.persistence.*;

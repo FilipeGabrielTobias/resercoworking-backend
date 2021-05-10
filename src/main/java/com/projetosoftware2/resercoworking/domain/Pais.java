@@ -7,8 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.projetosoftware2.resercoworking.domain.Pais.PaisBuilder;
-import com.projetosoftware2.resercoworking.dto.PaisDTO;
+import com.projetosoftware2.resercoworking.domain.dto.PaisDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,14 +31,14 @@ public class Pais {
 	@Column(name = "nm_pais")
     private String nmPais;
 	
-	public Pais(PaisDTO dto) {
+	public Pais(PaisDto dto) {
 		this.id = dto.getId();
 		this.nmPais = dto.getNmPais();
 		
 	}
 	
 	
-	public Pais updatePais(PaisDTO dto) {
+	public Pais updatePais(PaisDto dto) {
         this.nmPais = dto.getNmPais();
         
         return this;

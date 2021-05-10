@@ -1,7 +1,8 @@
 package com.projetosoftware2.resercoworking.services;
 
 import com.projetosoftware2.resercoworking.domain.ModalidadeEspaco;
-import com.projetosoftware2.resercoworking.dto.ModalidadeEspacoDto;
+import com.projetosoftware2.resercoworking.domain.dto.ModalidadeEspacoDto;
+import com.projetosoftware2.resercoworking.domain.mappers.ModalidadeEspacoMapper;
 import com.projetosoftware2.resercoworking.repositories.ModalidadeEspacoRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +13,21 @@ import java.util.List;
 @Service
 public class ModalidadeEspacoService {
     @Autowired
-    public ModalidadeEspacoRepository modalidadeEspacoRepository;
+    private ModalidadeEspacoRepository modalidadeEspacoRepository;
+    @Autowired
+    private ModalidadeEspacoMapper modalidadeEspacoMapper;
 
-
-    public ModalidadeEspaco insertModalidadeEspaco(ModalidadeEspaco dto) {
-//        ModalidadeEspaco modalidade = new ModalidadeEspaco(dto);
-        return modalidadeEspacoRepository.save(dto);
+    public ModalidadeEspaco insertModalidadeEspaco(ModalidadeEspacoDto dto) {
+        return modalidadeEspacoRepository.save(modalidadeEspacoMapper.toModalidadeEspaco(dto));
     }
 
     public void deleteModalidadeEspaco(Long id) {
-        modalidadeEspacoRepository.deleteById(id);
+        modalidadeEspacoRepository.delete(getModalidadeEspacoById(id));
     }
 
-    public ModalidadeEspaco updateModalidadeEspaco(Long id, ModalidadeEspaco dto) {
-        ModalidadeEspaco modalidadeEspaco = modalidadeEspacoRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Modalidade de espaço não encontrada"));
-        return modalidadeEspacoRepository.save(modalidadeEspaco.updateModalidadeEspaco(dto));
+    public ModalidadeEspaco updateModalidadeEspaco(Long id, ModalidadeEspacoDto dto) {
+        ModalidadeEspaco modalidadeEspaco = getModalidadeEspacoById(id);
+        return modalidadeEspacoRepository.save(modalidadeEspacoMapper.updateModalidadeEspaco(dto, modalidadeEspaco));
     }
 
     public List<ModalidadeEspaco> selectModalidade() {

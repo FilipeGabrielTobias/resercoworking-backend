@@ -1,0 +1,24 @@
+package com.projetosoftware2.resercoworking.domain.dto;
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class EspacoDto {
+    private String nome;
+    private String descicao;
+    private Double metrosQuadrados;
+    private Integer qtPontos;
+    private Double vlHora;
+    private Double nota;
+    private Boolean situacao;
+    private ModalidadeEspaco modalidadeEspaco;
+
+    @Data
+    public static class ModalidadeEspaco {
+        private Long id;
+        private String nome;
+    }
+}

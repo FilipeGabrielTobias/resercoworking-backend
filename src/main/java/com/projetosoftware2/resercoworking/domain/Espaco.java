@@ -1,6 +1,6 @@
 package com.projetosoftware2.resercoworking.domain;
 
-import com.projetosoftware2.resercoworking.dto.EspacoDto;
+import com.projetosoftware2.resercoworking.domain.dto.EspacoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,16 +28,16 @@ public class Espaco implements Serializable {
     private String nome;
 
     @Column(name = "descricao")
-    private String descicao;
+    private String descricao;
 
     @Column(name = "metros_quadrados", nullable = false)
     private Double metrosQuadrados;
 
-    @Column(name = "pontos", nullable = false)
-    private Integer qtPontos;
+    @Column(name = "quantidade_pontos", nullable = false)
+    private Integer quantidadePontos;
     
-    @Column(name = "vl_hora", nullable = false)
-    private Double vlHora;
+    @Column(name = "valor_hora", nullable = false)
+    private Double valorHora;
     
     @Column(name = "nota")
     private Double nota;
@@ -44,31 +45,10 @@ public class Espaco implements Serializable {
     @Column(name = "situacao", nullable = false)
     private Boolean situacao = Boolean.TRUE;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_modalidade_espaco", nullable = false)
     private ModalidadeEspaco modalidadeEspaco;
 
-    public Espaco(EspacoDto dto, ModalidadeEspaco modalidadeEspaco) {
-        this.nome = dto.getNome();
-        this.descicao = dto.getDescicao();
-        this.metrosQuadrados = dto.getMetrosQuadrados();
-        this.qtPontos = dto.getQtPontos();
-        this.vlHora = dto.getVlHora();
-        this.nota = dto.getNota();
-        this.situacao = dto.getSituacao();
-        this.modalidadeEspaco = modalidadeEspaco;
-    }
-
-    public Espaco updateEspaco(EspacoDto dto, ModalidadeEspaco modalidadeEspaco) {
-        this.nome = dto.getNome();
-        this.descicao = dto.getDescicao();
-        this.metrosQuadrados = dto.getMetrosQuadrados();
-        this.qtPontos = dto.getQtPontos();
-        this.vlHora = dto.getVlHora();
-        this.nota = dto.getNota();        
-        this.situacao = dto.getSituacao();
-        this.modalidadeEspaco = modalidadeEspaco;
-
-        return this;
-    }
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "espaco", orphanRemoval = true)
+    private List<AssociacaoEspacoImagem> imagens;
 }

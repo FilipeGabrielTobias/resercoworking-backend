@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetosoftware2.resercoworking.domain.Cidade;
-import com.projetosoftware2.resercoworking.dto.CidadeDTO;
+import com.projetosoftware2.resercoworking.domain.dto.CidadeDto;
 import com.projetosoftware2.resercoworking.repositories.CidadeRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
 
@@ -25,11 +25,11 @@ public class CidadeService {
                 .orElseThrow(() -> new ObjectNotFoundException("Cidade não encontrada"));
     }
 	
-	public Cidade saveCidade(CidadeDTO dto) {
+	public Cidade saveCidade(CidadeDto dto) {
 		return repository.save(new Cidade(dto));
 	}
 	
-	public Cidade updateCidade(Long id, CidadeDTO dto) {
+	public Cidade updateCidade(Long id, CidadeDto dto) {
 		Cidade cidade =  getById(id);
 		return repository.save(cidade.updateCidade(dto));
 	}

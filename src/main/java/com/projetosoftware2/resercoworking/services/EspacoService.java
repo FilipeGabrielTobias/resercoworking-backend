@@ -1,8 +1,9 @@
 package com.projetosoftware2.resercoworking.services;
 
 import com.projetosoftware2.resercoworking.domain.Espaco;
-import com.projetosoftware2.resercoworking.domain.ModalidadeEspaco;
-import com.projetosoftware2.resercoworking.dto.EspacoDto;
+import com.projetosoftware2.resercoworking.domain.dto.EspacoDto;
+import com.projetosoftware2.resercoworking.domain.dto.EspacoResumoDto;
+import com.projetosoftware2.resercoworking.domain.mappers.EspacoMapper;
 import com.projetosoftware2.resercoworking.repositories.EspacoRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,11 @@ public class EspacoService {
 
     @Autowired
     private EspacoRepository espacoRepository;
+    @Autowired
+    private EspacoMapper espacoMapper;
 
-    public List<Espaco> getAllEspaco() {
-        return espacoRepository.findAll();
+    public List<EspacoResumoDto> getAllEspaco() {
+        return espacoMapper.toEspacosResumoDto(espacoRepository.findAll());
     }
 
     public Espaco getByIdEspaco(Long espacoId) {
@@ -26,20 +29,15 @@ public class EspacoService {
     }
 
     public Espaco saveEspaco(EspacoDto dto) {
-//        TODO: ajustar para pegar a modalidade de espaco informada
-        ModalidadeEspaco modalidadeEspaco = new ModalidadeEspaco();
-        return espacoRepository.save(new Espaco(dto, modalidadeEspaco));
+        return espacoRepository.save(espacoMapper.toEspaco(dto));
     }
 
     public Espaco updateEspaco(Long espacoId, EspacoDto dto) {
-//        TODO: ajustar para pegar a modalidade de espaco informada
-        ModalidadeEspaco modalidadeEspaco = new ModalidadeEspaco();
-        Espaco espaco = espacoRepository.findById(espacoId)
-                .orElseThrow(() -> new ObjectNotFoundException("Espaço não encontrado"));
-        return espacoRepository.save(espaco.updateEspaco(dto, modalidadeEspaco));
+        Espaco espaco = getByIdEspaco(espacoId);
+        return espacoRepository.save(espacoMapper.updateEspaco(dto, espaco));
     }
 
     public void deleteEspaco(Long espacoId) {
-        espacoRepository.deleteById(espacoId);
+        espacoRepository.delete(getByIdEspaco(espacoId));
     }
 }

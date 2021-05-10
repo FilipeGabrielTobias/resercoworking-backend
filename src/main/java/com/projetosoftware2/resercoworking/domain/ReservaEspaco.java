@@ -1,6 +1,7 @@
 package com.projetosoftware2.resercoworking.domain;
 
-import com.projetosoftware2.resercoworking.dto.ReservaEspacoDto;
+import com.projetosoftware2.resercoworking.domain.enums.FormaPagamento;
+import com.projetosoftware2.resercoworking.domain.enums.SituacaoReservaEspaco;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,11 +36,11 @@ public class ReservaEspaco implements Serializable {
     @Column(name = "hora_final", nullable = false)
     private LocalTime horaFinal;
 
-    @Column(name = "vl_total", nullable = false)
-    private Double vlTotal;
+    @Column(name = "valor_total", nullable = false)
+    private Double valorTotal;
     
-    @Column(name = "qt_pontos_total", nullable = false)
-    private Integer qtPontosTotal;
+    @Column(name = "quantidade_pontos_total", nullable = false)
+    private Integer quantidadePontosTotal;
          
     @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento", nullable = false)
@@ -47,7 +48,7 @@ public class ReservaEspaco implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "situacao_reserva_espaco", nullable = false)
-    private SituacaoReservaEspaco situacaoReservaEspaco = SituacaoReservaEspaco.AGENDADO;
+    private SituacaoReservaEspaco situacaoReservaEspaco = SituacaoReservaEspaco.RESERVADO;
 
     @ManyToOne
     @JoinColumn(name = "fk_espaco", nullable = false)
@@ -59,21 +60,5 @@ public class ReservaEspaco implements Serializable {
     
     @OneToOne
     @JoinColumn(name = "fk_feedback", nullable = true)
-    private FeedBackEspaco feedBackEspaco;
-
-    public ReservaEspaco(ReservaEspacoDto dto) {
-        this.dataInicial = dto.getDataInicial();
-        this.dataFinal = dto.getDataFinal();
-        this.horaInicial = dto.getHoraInicial();
-        this.horaFinal = dto.getHoraFinal();
-        this.formaPagamento = dto.getFormaPagamento();
-        Espaco espaco = new Espaco();
-        espaco.setId(dto.getEspaco().getId());        
-        this.espaco = espaco;
-        this.qtPontosTotal = dto.getEspaco().getQtPontos();
-        this.vlTotal = dto.getEspaco().getVlHora();
-        Usuario usuario = new Usuario();
-        usuario.setId(dto.getUsuarioReservou().getId());
-        this.usuarioReservou = usuario;
-    }
+    private FeedbackEspaco feedbackEspaco;
 }

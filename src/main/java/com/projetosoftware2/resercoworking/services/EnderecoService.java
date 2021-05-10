@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetosoftware2.resercoworking.domain.Endereco;
-import com.projetosoftware2.resercoworking.dto.EnderecoDTO;
+import com.projetosoftware2.resercoworking.domain.dto.EnderecoDto;
 import com.projetosoftware2.resercoworking.repositories.EnderecoRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
 
@@ -25,11 +25,11 @@ public class EnderecoService {
                 .orElseThrow(() -> new ObjectNotFoundException("Endereço não encontrado"));
     }
 	
-	public Endereco saveEndereco(EnderecoDTO dto) {
+	public Endereco saveEndereco(EnderecoDto dto) {
 		return repository.save(new Endereco(dto));
 	}
 	
-	public Endereco updateEndereco(Long id, EnderecoDTO dto) {
+	public Endereco updateEndereco(Long id, EnderecoDto dto) {
 		Endereco endereco =  getById(id);
 		return repository.save(endereco.updateEndereco(dto));
 	}

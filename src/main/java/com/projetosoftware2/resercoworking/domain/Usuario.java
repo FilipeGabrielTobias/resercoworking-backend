@@ -1,11 +1,13 @@
 package com.projetosoftware2.resercoworking.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,11 +32,6 @@ public class Usuario implements Serializable {
     @Column(name = "nm_usuario")
     private String nome;
         
-    //verificar
-    @ManyToOne
-    @JoinColumn(name = "cd_perfil", unique = true)
-    private Perfil perfil; 
-    
     @ManyToOne
     @JoinColumn(name = "cd_endereco", nullable = false)
     private Endereco endereco;
@@ -61,9 +58,6 @@ public class Usuario implements Serializable {
     @Column(name = "status_usuario")
     private Boolean situacao = Boolean.TRUE;
     
-    
-    
-
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
     private Set<AssociacaoUsuarioPerfil> associacaoUsuarioPerfil = new HashSet<>();
 }

@@ -1,6 +1,6 @@
 package com.projetosoftware2.resercoworking.domain;
 
-import com.projetosoftware2.resercoworking.dto.ModalidadeEspacoDto;
+import com.projetosoftware2.resercoworking.domain.dto.ModalidadeEspacoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,15 +28,18 @@ public class ModalidadeEspaco implements Serializable {
     @Column(name = "descricao", length = 500)
     private String descricao;
 
+    private Boolean situacao = Boolean.TRUE;
+
     public ModalidadeEspaco(ModalidadeEspacoDto dto) {
         this.nome = dto.getNome();
         this.descricao = dto.getDescricao();
+        this.situacao = dto.getSituacao();
     }
 
     public ModalidadeEspaco updateModalidadeEspaco(ModalidadeEspaco dto) {
         this.nome = dto.getNome();
         this.descricao = dto.getDescricao();
-
+        this.situacao = dto.getSituacao();
         return this;
     }
 }

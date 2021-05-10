@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetosoftware2.resercoworking.domain.Bairro;
-import com.projetosoftware2.resercoworking.dto.BairroDTO;
+import com.projetosoftware2.resercoworking.domain.dto.BairroDto;
 import com.projetosoftware2.resercoworking.repositories.BairroRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
 
@@ -25,11 +25,11 @@ public class BairroService {
                 .orElseThrow(() -> new ObjectNotFoundException("Bairro não encontrado"));
     }
 	
-	public Bairro saveBairro(BairroDTO dto) {
+	public Bairro saveBairro(BairroDto dto) {
 		return repository.save(new Bairro(dto));
 	}
 	
-	public Bairro updateBairro(Long id, BairroDTO dto) {
+	public Bairro updateBairro(Long id, BairroDto dto) {
 		Bairro bairro =  getById(id);
 		return repository.save(bairro.updateBairro(dto));
 	}

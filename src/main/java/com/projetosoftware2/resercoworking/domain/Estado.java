@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.projetosoftware2.resercoworking.dto.EstadoDTO;
+import com.projetosoftware2.resercoworking.domain.dto.EstadoDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,7 +39,7 @@ public class Estado {
 	private Pais pais;
 	
 	
-	public Estado(EstadoDTO dto) {
+	public Estado(EstadoDto dto) {
 		this.id = dto.getId();
 		this.nmUF = dto.getNmUF();
 		this.nmEstado = dto.getNmEstado();
@@ -48,7 +48,7 @@ public class Estado {
 		this.pais = pais;
 	}
 	
-	public Estado updateEstado(EstadoDTO dto) {		
+	public Estado updateEstado(EstadoDto dto) {
 		this.nmUF = dto.getNmUF();
 		this.nmEstado = dto.getNmEstado();
 		Pais pais =  new Pais();

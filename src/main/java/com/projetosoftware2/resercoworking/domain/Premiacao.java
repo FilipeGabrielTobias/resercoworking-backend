@@ -1,6 +1,6 @@
 package com.projetosoftware2.resercoworking.domain;
 
-import com.projetosoftware2.resercoworking.dto.PremiacaoDto;
+import com.projetosoftware2.resercoworking.domain.dto.PremiacaoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,21 +34,4 @@ public class Premiacao implements Serializable {
 
     @Column(name = "situacao", nullable = false)
     private Boolean situacao = Boolean.TRUE;
-
-    public Premiacao(PremiacaoDto dto) {
-    	this.id = dto.getId();
-        this.nome = dto.getNome();
-        this.descricao = dto.getDescricao();
-        this.pontosNecessarios = dto.getPontosNecessarios();
-        this.situacao = dto.getSituacao();
-    }
-
-    public Premiacao updatePremiacao(Premiacao dto) {
-        this.nome = dto.getNome();
-        this.descricao = dto.getDescricao();
-        this.pontosNecessarios = dto.getPontosNecessarios();
-        this.situacao = dto.getSituacao();
-
-        return this;
-    }
 }
