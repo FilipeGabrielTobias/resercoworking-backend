@@ -24,7 +24,7 @@ public class BairroResource {
 	private BairroService service;
 	
 	@GetMapping
-	public List<Bairro> getPais(){
+	public List<Bairro> getBairro(){
         return service.getAll();    		  
 	}
 	 

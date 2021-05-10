@@ -36,6 +36,7 @@ public class Premiacao implements Serializable {
     private Boolean situacao = Boolean.TRUE;
 
     public Premiacao(PremiacaoDto dto) {
+    	this.id = dto.getId();
         this.nome = dto.getNome();
         this.descricao = dto.getDescricao();
         this.pontosNecessarios = dto.getPontosNecessarios();

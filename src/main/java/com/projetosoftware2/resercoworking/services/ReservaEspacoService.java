@@ -28,6 +28,9 @@ public class ReservaEspacoService {
     @Autowired
     private FeedBackEspacoRepository feedBackEspacoRepository;
     
+    @Autowired
+	private UsuarioService usuarioService;
+    
     public List<ReservaEspaco> getAllReservas() {
         return reservaEspacoRepository.findAll();
     }
@@ -47,6 +50,11 @@ public class ReservaEspacoService {
         reserva.setSituacaoReservaEspaco(SituacaoReservaEspaco.CANCELADO);
         ReservaEspacoCancelamento reservaEspacoCancelamento = new ReservaEspacoCancelamento(dto);
         reservaEspacoRepository.save(reserva);
+        /*Atualiza Pontuacao retira os pontos pois a reserva foi cancelada*/
+        int qtPontos = reserva.getQtPontosTotal();
+        long idUsuario = reserva.getUsuarioReservou().getId();
+        usuarioService.atualizaPontuacao(idUsuario, qtPontos, true);
+        
         return reservaEspacoCancelamentoRepository.save(reservaEspacoCancelamento);
     }
     
@@ -55,6 +63,12 @@ public class ReservaEspacoService {
                 .orElseThrow(() -> new ObjectNotFoundException("Reserva não encontrada"));
         reserva.setSituacaoReservaEspaco(SituacaoReservaEspaco.FINALIZADO);
         reserva.setDataFinal(LocalDate.now());
+        
+        /*Atualiza Pontuacao adiciona os pontos*/
+        int qtPontos = reserva.getQtPontosTotal();
+        long idUsuario = reserva.getUsuarioReservou().getId();
+        usuarioService.atualizaPontuacao(idUsuario, qtPontos, false);
+        
         return reservaEspacoRepository.save(reserva);
     }
     
