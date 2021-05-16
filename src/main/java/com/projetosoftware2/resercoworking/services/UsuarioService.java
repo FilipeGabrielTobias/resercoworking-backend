@@ -30,14 +30,14 @@ public class UsuarioService {
     	Usuario usuario = usuarioRepository.findById(usuarioId)
     	                .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado"));
     	
-    	int pontos = usuario.getQtPontos();
+    	int pontos = usuario.getQuantidadePontos();
     	if (resgatePontos) {
     		pontos -= qtPontos;    		 
     	} else {
     		pontos += qtPontos;  
     	}
     	
-    	usuario.setQtPontos(pontos);
+    	usuario.setQuantidadePontos(pontos);
 
     	return usuarioRepository.save(usuario);
     }

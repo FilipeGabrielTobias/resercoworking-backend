@@ -56,31 +56,31 @@ public class DBService {
 
         Pais pais = new Pais();
         pais.setId(1L);
-        pais.setNmPais("Brasil");
+        pais.setNome("Brasil");
         paisRepository.save(pais);
 
         Estado estado = new Estado();
         estado.setId(1L);
-        estado.setNmUF("SC");
-        estado.setNmEstado("Santa Catarina");
+        estado.setUf("SC");
+        estado.setNome("Santa Catarina");
         estado.setPais(pais);
         estadoRepository.save(estado);
 
         Cidade cidade = new Cidade();
         cidade.setId(1L);
-        cidade.setNmCidade("Blumenau");
+        cidade.setNome("Blumenau");
         cidade.setEstado(estado);
         cidadeRepository.save(cidade);
 
         Bairro bairro = new Bairro();
         bairro.setId(1L);
-        bairro.setNmBairro("Vorstadt");
+        bairro.setNome("Vorstadt");
         bairro.setCidade(cidade);
         bairroRepository.save(bairro);
 
         Endereco endereco = new Endereco();
         endereco.setId(1L);
-        endereco.setNmRua("Rua Pedro Krauss Senior");
+        endereco.setRua("Rua Pedro Krauss Senior");
         endereco.setBairro(bairro);
         enderecoRepository.save(endereco);
 
@@ -90,19 +90,11 @@ public class DBService {
         usuario.setEmail("tobias.filipe@gmail.com");
         usuario.setSenha(pe.encode("123"));
         usuario.setEndereco(endereco);
+        Set<Perfil> set = new HashSet<>();
+        set.add(perfil);
+        usuario.setPerfis(set);
 
         perfilRepositoy.save(perfil);
-        usuarioRepository.save(usuario);
-
-        Set<AssociacaoUsuarioPerfil> set = new HashSet<>();
-        AssociacaoUsuarioPerfil associacaoUsuarioPerfil = new AssociacaoUsuarioPerfil();
-        associacaoUsuarioPerfil.setId(1L);
-        associacaoUsuarioPerfil.setUsuario(usuario);
-        associacaoUsuarioPerfil.setPerfil(perfil);
-        set.add(associacaoUsuarioPerfil);
-
-        usuario.setAssociacaoUsuarioPerfil(set);
-
         usuarioRepository.save(usuario);
 
         Premiacao premiacao = new Premiacao();

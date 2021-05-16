@@ -2,12 +2,7 @@ package com.projetosoftware2.resercoworking.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.projetosoftware2.resercoworking.domain.dto.FeedbackEspacoDto;
 
@@ -23,7 +18,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "feedback_espaco") // confirmar nome com o grupo 
+@Table(name = "feedback_espaco")
 public class FeedbackEspaco implements Serializable {
 
 	@Id
@@ -36,11 +31,7 @@ public class FeedbackEspaco implements Serializable {
     @Column(name = "nota_feedback", nullable = false)
     private Integer notafeedback;
 
-	public FeedbackEspaco(FeedbackEspacoDto dto) {
-		this.id = dto.getId();
-		this.dsfeedback = dto.getDsFeedBack();
-		this.notafeedback = dto.getNotaFeedBack();
-	}
-       
-    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_reserva_espaco")
+    private ReservaEspaco reservaEspaco;
 }

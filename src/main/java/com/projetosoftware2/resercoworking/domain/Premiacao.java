@@ -1,6 +1,5 @@
 package com.projetosoftware2.resercoworking.domain;
 
-import com.projetosoftware2.resercoworking.domain.dto.PremiacaoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

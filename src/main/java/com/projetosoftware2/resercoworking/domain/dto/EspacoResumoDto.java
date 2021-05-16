@@ -13,4 +13,6 @@ public class EspacoResumoDto {
     private Long id;
     private String nome;
     private Boolean situacao;
+    private Integer quantidadePontos;
+    private Double valorHora;
 }

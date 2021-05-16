@@ -12,6 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
@@ -19,8 +21,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "recebimento")
-public class Recebimento {
-	
+public class Recebimento implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
 	@Id
 	@ManyToOne
     @JoinColumn(name = "Recebimento_fk0", nullable = false)

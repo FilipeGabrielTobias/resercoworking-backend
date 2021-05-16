@@ -30,28 +30,28 @@ public class Cidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name = "nm_cidade")
-    private String nmCidade;
+	@Column(name = "nome")
+    private String nome;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_estado", nullable = false)
 	private Estado estado;
-	
+
 	public Cidade(CidadeDto dto) {
 		this.id = dto.getId();
-		this.nmCidade= dto.getNmCidade();
+		this.nome= dto.getNmCidade();
 		Estado estado = new Estado();
 		estado.setId(dto.getEstado().getId());
 		this.estado = estado;
 	}
 
 	public Cidade updateCidade(CidadeDto dto) {
-		this.nmCidade= dto.getNmCidade();
+		this.nome= dto.getNmCidade();
 		Estado estado = new Estado();
 		estado.setId(dto.getEstado().getId());
 		this.estado = estado;
 		return this;
 	}
-	
-	
+
+
 }

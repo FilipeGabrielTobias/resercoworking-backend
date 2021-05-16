@@ -1,10 +1,9 @@
 package com.projetosoftware2.resercoworking.domain.dto;
 
-import java.io.Serializable;
-
 import com.projetosoftware2.resercoworking.domain.Pais;
-
 import lombok.Data;
+
+import java.io.Serializable;
 
 @Data
 public class PaisDto implements Serializable {
@@ -21,7 +20,7 @@ public class PaisDto implements Serializable {
     
     public PaisDto(Pais pais) {
     	this.id = pais.getId();
-    	this.nmPais= pais.getNmPais();
+    	this.nmPais= pais.getNome();
     }   
     
 }

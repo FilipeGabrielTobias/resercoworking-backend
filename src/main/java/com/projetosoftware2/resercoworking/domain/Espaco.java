@@ -49,6 +49,7 @@ public class Espaco implements Serializable {
     @JoinColumn(name = "fk_modalidade_espaco", nullable = false)
     private ModalidadeEspaco modalidadeEspaco;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "espaco", orphanRemoval = true)
-    private List<AssociacaoEspacoImagem> imagens;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_imagem")
+    private Arquivo imagemEspaco;
 }

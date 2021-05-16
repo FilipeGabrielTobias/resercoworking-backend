@@ -6,7 +6,9 @@ import com.projetosoftware2.resercoworking.domain.dto.ReservaEspacoResumoDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
+import java.time.LocalTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Mapper(componentModel = "spring")

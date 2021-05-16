@@ -1,6 +1,7 @@
 package com.projetosoftware2.resercoworking.controllers;
 
 import com.projetosoftware2.resercoworking.domain.ReservaEspaco;
+import com.projetosoftware2.resercoworking.domain.dto.FeedbackEspacoDto;
 import com.projetosoftware2.resercoworking.domain.dto.ReservaEspacoCancelamentoDto;
 import com.projetosoftware2.resercoworking.domain.dto.ReservaEspacoDto;
 import com.projetosoftware2.resercoworking.domain.dto.ReservaEspacoResumoDto;
@@ -18,22 +19,27 @@ public class ReservaEspacoController {
     private ReservaEspacoService reservaEspacoService;
 
     @GetMapping
-    public List<ReservaEspacoResumoDto> getEspacos() {
+    public List<ReservaEspacoResumoDto> getReservasEspaco() {
         return reservaEspacoService.getAllReservas();
     }
 
-    @GetMapping("/{espacoId}")
-    public ReservaEspaco getByIdEspaco(@PathVariable Long espacoId) {
-        return reservaEspacoService.getReservaById(espacoId);
+    @GetMapping("/{reservaEspacoId}")
+    public ReservaEspaco getReservaById(@PathVariable Long reservaEspacoId) {
+        return reservaEspacoService.getReservaById(reservaEspacoId);
     }
 
     @PostMapping
-    public ReservaEspaco saveEspaco(@RequestBody ReservaEspacoDto dto) {
-        return reservaEspacoService.saveReserva(dto);
+    public ReservaEspaco reservarEspaco(@RequestBody ReservaEspacoDto dto) {
+        return reservaEspacoService.reservarEspaco(dto);
     }
 
-    @DeleteMapping("/{espacoId}")
-    public void deleteEspaco(@PathVariable Long espacoId) {
-        reservaEspacoService.cancelarReservaEspaco(new ReservaEspacoCancelamentoDto());
+    @PostMapping("/{reservaEspacoId}/finalizar-reserva")
+    public ReservaEspaco finalizarReservaEspaco(@PathVariable Long reservaEspacoId, @RequestBody FeedbackEspacoDto feedbackEspacoDto) {
+        return reservaEspacoService.finalizarReserva(reservaEspacoId, feedbackEspacoDto);
+    }
+
+    @PostMapping("/cancelar-reserva")
+    public void cancelarReservaEspaco(@RequestBody ReservaEspacoCancelamentoDto dto) {
+        reservaEspacoService.cancelarReservaEspaco(dto);
     }
 }

@@ -26,38 +26,36 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "nr_cpf")
+    @Column(name = "cpf")
     private String cpf;
     
-    @Column(name = "nm_usuario")
+    @Column(name = "nome")
     private String nome;
         
     @ManyToOne
-    @JoinColumn(name = "cd_endereco", nullable = false)
+    @JoinColumn(name = "endereco", nullable = false)
     private Endereco endereco;
     
-    @Column(name = "dt_nascimento")
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
     
-    @Column(name = "nr_telefone")
-    private Integer nrTelefone;
+    @Column(name = "telefone")
+    private String telefone;
 
-    @Column(name = "nm_email")
+    @Column(name = "email")
     private String email;
     
-    @Column(name = "qt_pontos")
-    private Integer qtPontos;
-    
-    @Column(name = "nm_login")
-    private String nmLogin;
-    
-    @Column(name = "nm_senha")
+    @Column(name = "quantidade_pontos")
+    private Integer quantidadePontos;
+
+    @Column(name = "senha")
     @JsonIgnore
     private String senha;
             
-    @Column(name = "status_usuario")
+    @Column(name = "situacao")
     private Boolean situacao = Boolean.TRUE;
-    
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
-    private Set<AssociacaoUsuarioPerfil> associacaoUsuarioPerfil = new HashSet<>();
+
+    @JoinTable(name = "usuario_perfil")
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Perfil> perfis = new HashSet<>();
 }

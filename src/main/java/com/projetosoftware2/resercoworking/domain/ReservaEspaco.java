@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -31,10 +32,10 @@ public class ReservaEspaco implements Serializable {
     private LocalDate dataFinal;
 
     @Column(name = "hora_inicial", nullable = false)
-    private LocalTime horaInicial;
+    private LocalDateTime horaInicial;
 
     @Column(name = "hora_final", nullable = false)
-    private LocalTime horaFinal;
+    private LocalDateTime horaFinal;
 
     @Column(name = "valor_total", nullable = false)
     private Double valorTotal;
@@ -57,8 +58,4 @@ public class ReservaEspaco implements Serializable {
     @ManyToOne
     @JoinColumn(name = "fk_usuario_reservou", nullable = false)
     private Usuario usuarioReservou;
-    
-    @OneToOne
-    @JoinColumn(name = "fk_feedback", nullable = true)
-    private FeedbackEspaco feedbackEspaco;
 }

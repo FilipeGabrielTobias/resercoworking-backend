@@ -1,14 +1,13 @@
 package com.projetosoftware2.resercoworking.services;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.projetosoftware2.resercoworking.domain.Bairro;
 import com.projetosoftware2.resercoworking.domain.dto.BairroDto;
 import com.projetosoftware2.resercoworking.repositories.BairroRepository;
 import com.projetosoftware2.resercoworking.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BairroService {

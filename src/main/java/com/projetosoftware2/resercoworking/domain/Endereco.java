@@ -32,28 +32,28 @@ public class Endereco implements Serializable {/**
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(name = "nm_rua")
-    private String nmRua;
+	@Column(name = "rua")
+    private String rua;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_bairro", nullable = false)
 	private Bairro bairro;
-	
+
 	public Endereco(EnderecoDto dto) {
         this.id = dto.getId();
-        this.nmRua = dto.getNmRua();
+        this.rua = dto.getNmRua();
         Bairro bairro = new Bairro();
 		bairro.setId(dto.getBairro().getId());
 		this.bairro = bairro;
 	}
-	
+
 	public Endereco updateEndereco(EnderecoDto dto) {
-		this.nmRua = dto.getNmRua();
+		this.rua = dto.getNmRua();
 		Bairro bairro = new Bairro();
 		bairro.setId(dto.getBairro().getId());
 		this.bairro = bairro;
 		return this;
 	}
 
-	
+
 }

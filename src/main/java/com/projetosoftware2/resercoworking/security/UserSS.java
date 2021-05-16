@@ -26,13 +26,13 @@ public class UserSS implements UserDetails {
     public UserSS(){
     }
 
-    public UserSS(Long id, String nome, String email, String senha, Set<AssociacaoUsuarioPerfil> perfis){
+    public UserSS(Long id, String nome, String email, String senha, Set<Perfil> perfis){
         super();
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getPerfil().getDescricao())).collect(Collectors.toList());
+        this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
     }
 
     @Override

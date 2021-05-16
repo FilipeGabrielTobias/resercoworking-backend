@@ -1,5 +1,6 @@
 package com.projetosoftware2.resercoworking.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -24,8 +25,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "aquisicao")
-public class Aquisicao {
-		    
+public class Aquisicao implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @ManyToOne
     @JoinColumn(name = "Aquisição_fk0", nullable = false)
