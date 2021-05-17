@@ -25,11 +25,11 @@ public class FeedbackEspaco implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    
-    @Column(name = "ds_feedback", length = 500)
-    private String dsfeedback;
+    @Column(name = "descricao", length = 500)
+    private String descricao;
     
-    @Column(name = "nota_feedback", nullable = false)
-    private Integer notafeedback;
+    @Column(name = "nota", nullable = false)
+    private Double nota;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_reserva_espaco")

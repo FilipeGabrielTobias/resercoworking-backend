@@ -40,4 +40,8 @@ public class EspacoService {
     public void deleteEspaco(Long espacoId) {
         espacoRepository.delete(getByIdEspaco(espacoId));
     }
+
+    public void atualizaNota() {
+
+    }
 }

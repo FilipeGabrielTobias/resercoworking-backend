@@ -46,7 +46,7 @@ public class Usuario implements Serializable {
     private String email;
     
     @Column(name = "quantidade_pontos")
-    private Integer quantidadePontos;
+    private Integer quantidadePontos = 0;
 
     @Column(name = "senha")
     @JsonIgnore

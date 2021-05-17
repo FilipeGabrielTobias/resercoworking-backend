@@ -8,10 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 public class EspacoDto {
     private String nome;
-    private String descicao;
+    private String descricao;
     private Double metrosQuadrados;
-    private Integer qtPontos;
-    private Double vlHora;
+    private Integer quantidadePontos;
+    private Double valorHora;
     private Double nota;
     private Boolean situacao;
     private ModalidadeEspaco modalidadeEspaco;

@@ -1,5 +1,6 @@
 package com.projetosoftware2.resercoworking.services;
 
+import com.projetosoftware2.resercoworking.domain.FeedbackEspaco;
 import com.projetosoftware2.resercoworking.domain.ReservaEspaco;
 import com.projetosoftware2.resercoworking.domain.ReservaEspacoCancelamento;
 import com.projetosoftware2.resercoworking.domain.dto.FeedbackEspacoDto;
@@ -61,7 +62,7 @@ public class ReservaEspacoService {
         ReservaEspaco reserva = getReservaById(dto.getReservaEspaco().getId());
         reserva.setSituacaoReservaEspaco(SituacaoReservaEspaco.CANCELADO);
         reservaEspacoRepository.save(reserva);
-        if (Objects.nonNull(reserva.getUsuarioReservou().getQuantidadePontos()) && reserva.getUsuarioReservou().getQuantidadePontos() != 0) {
+        if (reserva.getUsuarioReservou().getQuantidadePontos() != 0) {
             usuarioService.atualizaPontuacao(reserva.getUsuarioReservou().getId(), reserva.getQuantidadePontosTotal(), true);
         }
         return reservaEspacoCancelamentoRepository.save(reservaEspacoCancelamentoMapper.toReservaEspacoCancelamento(dto));
@@ -72,6 +73,13 @@ public class ReservaEspacoService {
         reserva.setSituacaoReservaEspaco(SituacaoReservaEspaco.FINALIZADO);
         usuarioService.atualizaPontuacao(reserva.getUsuarioReservou().getId(), reserva.getQuantidadePontosTotal(), false);
         feedBackEspacoRepository.save(feedbackEspacoMapper.toFeedbackEspaco(feedbackEspacoDto));
+        atualizaNotaEspaco(reserva);
         return reservaEspacoRepository.save(reserva);
+    }
+
+    private void atualizaNotaEspaco(ReservaEspaco reservaEspaco) {
+        List<FeedbackEspaco> feedbacks = feedBackEspacoRepository.findAllByReservaEspacoId(reservaEspaco.getId());
+        Double somaNotas = feedbacks.stream().map(FeedbackEspaco::getNota).reduce(0.0, Double::sum);
+        reservaEspaco.getEspaco().setNota(somaNotas/feedbacks.size());
     }
 }
