@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
     private String nome;
         
     @ManyToOne
-    @JoinColumn(name = "endereco", nullable = false)
+    @JoinColumn(name = "endereco")
     private Endereco endereco;
     
     @Column(name = "data_nascimento")

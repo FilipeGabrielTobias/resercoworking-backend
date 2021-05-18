@@ -21,6 +21,16 @@ public class UsuarioController {
         return usuarioService.getUsuarios();
     }
 
+    @GetMapping("{id}")
+    public Usuario getUsuarioById(@PathVariable Long id) {
+        return usuarioService.getUsuarioById(id);
+    }
+
+    @PutMapping("{id}")
+    public Usuario updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+        return usuarioService.getUsuarioById(id);
+    }
+
     @PostMapping
     public Usuario saveUsuario(@RequestBody Usuario usuario) {
         return usuarioService.saveUsuario(usuario);

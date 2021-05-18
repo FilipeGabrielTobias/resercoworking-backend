@@ -18,7 +18,16 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
+    public Usuario getUsuarioById(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado"));
+    }
+
     public Usuario saveUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    public Usuario updateUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
